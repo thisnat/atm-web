@@ -1,8 +1,16 @@
 package th.ac.ku.atm.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Customer {
+
+    @Id
     private int id;
     private String name,pin;
+
+    public Customer() {}
 
     public Customer(int id, String name, String pin) {
         this.id = id;
