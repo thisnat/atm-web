@@ -9,7 +9,9 @@ public class BankAccount {
     private int id;
     @Nullable
     private int customerId;
+    @Nullable
     private String type;
+    @Nullable
     private double balance;
 
     public BankAccount(int id, int customerId, String type, double balance) {
@@ -49,6 +51,14 @@ public class BankAccount {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public void deposit(double amount){
+        this.balance += amount;
+    }
+
+    public void withdraw(double amount){
+        this.balance -= amount;
     }
 
     @Override

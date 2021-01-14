@@ -29,23 +29,6 @@ public class BankAccountController {
         return "redirect:bankaccount";
     }
 
-    @GetMapping("/edit/{id}")
-    public String getEditBankAccountPage(@PathVariable int id, Model model) {
-        BankAccount account = accountService.getBankAccount(id);
-        model.addAttribute("bankAccount", account);
-        return "bankaccount-edit";
-    }
-
-    @PostMapping("/edit/{id}")
-    public String editAccount(@PathVariable int id,
-                              @ModelAttribute BankAccount bankAccount,
-                              Model model) {
-
-        accountService.editBankAccount(bankAccount);
-        model.addAttribute("bankaccounts",accountService.getBankAccounts());
-        return "redirect:/bankaccount";
-    }
-
     @PostMapping("/delete/{id}")
     public String deleteAccount(@PathVariable int id,
                                 Model model){
@@ -55,4 +38,43 @@ public class BankAccountController {
         model.addAttribute("bankaccounts",accountService.getBankAccounts());
         return  "redirect:/bankaccount";
     }
+
+    @GetMapping("/deposit/{id}")
+    public String getDepositBankAccountPage(@PathVariable int id, Model model) {
+        BankAccount account = accountService.getBankAccount(id);
+        model.addAttribute("bankAccount", account);
+        return "bankaccount-edit";
+    }
+
+    @GetMapping("/withdraw/{id}")
+    public String getWithdrawBankAccountPage(@PathVariable int id, Model model) {
+        BankAccount account = accountService.getBankAccount(id);
+        model.addAttribute("bankAccount", account);
+        return "bankaccount-withdraw";
+    }
+
+    @PostMapping("/deposit/{id}")
+    public String depositAccount(@PathVariable int id,
+                                 @ModelAttribute BankAccount bankAccount,
+                                 @RequestParam("amount") double amount,
+                                 Model model) {
+
+        bankAccount.deposit(amount);
+        accountService.editBankAccount(bankAccount);
+        model.addAttribute("bankaccounts",accountService.getBankAccounts());
+        return "redirect:/bankaccount";
+    }
+
+    @PostMapping("/withdraw/{id}")
+    public String withdrawAccount(@PathVariable int id,
+                                  @ModelAttribute BankAccount bankAccount,
+                                  @RequestParam("amount") double amount,
+                                  Model model) {
+
+        bankAccount.withdraw(amount);
+        accountService.editBankAccount(bankAccount);
+        model.addAttribute("bankaccounts",accountService.getBankAccounts());
+        return "redirect:/bankaccount";
+    }
+
 }

@@ -4,20 +4,20 @@
       xmlns:th="https://www.thymeleaf.org">
 
 <div class="container mt-3" layout:fragment="content">
-    <h1>Deposit</h1>
+    <h1>Withdraw</h1>
     <form
-            th:action="@{/bankaccount/deposit/{id}(id=${bankAccount.id})}"
+            th:action="@{/bankaccount/withdraw/{id}(id=${bankAccount.id})}"
             th:object="${bankAccount}"
             method="POST">
 
         <div class="form-group">
             <label for="inputId">Id</label>
-            <input readonly  type="text" th:field="*{id}" class="form-control" id="inputId">
+            <input readonly type="text" th:field="*{id}" class="form-control" id="inputId">
         </div>
 
         <div class="form-group">
             <label for="inputCustomer">Customer Id</label>
-            <input readonly  type="text" th:field="*{customerId}" class="form-control" id="inputCustomer">
+            <input readonly type="text" th:field="*{customerId}" class="form-control" id="inputCustomer">
         </div>
 
         <div class="form-group">
@@ -31,12 +31,12 @@
         </div>
 
         <div class="form-group">
-            <label for="inputAmount">Deposit amount</label>
+            <label for="inputAmount">Withdraw amount</label>
             <input type="text" class="form-control" id="inputAmount" name="amount">
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Deposit</button>
+            <button type="submit" class="btn btn-primary">Withdraw</button>
         </div>
 
     </form>
